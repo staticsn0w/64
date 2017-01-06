@@ -1,4 +1,4 @@
-# Embedbot 1.0 made by -Kiwi Catnip ♡#1540s
+# Embedbot 1.1 made by -Kiwi Catnip ♡#1540s
 
 #### -- CONFIG -- ###
 
@@ -20,14 +20,13 @@ password = asdf
 # Copy the token part (Don't show anyone your token), and replace asdf in "token = asdf" with your actual token.
 # Make sure to put it in quotes.
 
-
-
-# Don't touch below this line.
-
+### - Text arguments - ###
+# If you want stuff like "hello {hug}" to be replaced with "hello \(^^\)", leave this on.
+textargs = True
+#textargs = False
 import discord
 from discord.ext import commands
 import asyncio
-
 
 bot = commands.Bot(command_prefix=invoker, self_bot=True)
 
@@ -40,7 +39,27 @@ async def on_ready():
     bot.remove_command("help")
     bot.remove_command("HelpFormatter")
 
-
+@bot.event
+async def on_message(message):
+    if textargs == True:
+        if message.author == message.server.me:	
+            messagereplace = message.content.replace("{hug}","\\\(^.^\\\)")
+            messagereplace = messagereplace.replace("{lenny}","( ͡° ͜ʖ ͡°)")
+            messagereplace = messagereplace.replace("{disapprove}","ಠ\_ಠ")
+            messagereplace = messagereplace.replace("{shrug}","¯\\_(ツ)_/¯")
+            messagereplace = messagereplace.replace("{tableflip}","(╯°□°）╯︵ ┻━┻")
+            messagereplace = messagereplace.replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)")
+            messagereplace = messagereplace.replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)")
+            messagereplace = messagereplace.replace("{unflip3}","┬─┬ノ( º _ ºノ)")
+            messagereplace = messagereplace.replace("{cute}","(◕‿◕✿)")
+            if not message.content == messagereplace:
+                await bot.edit_message(message, messagereplace)
+    await bot.process_commands(message)
+			
+@bot.command(pass_context=True)
+async def test(ctx):
+    await bot.say("The selfbot is active.")
+	
 @bot.command(pass_context=True)
 async def kill(ctx):
     await bot.say("Killed. You can run the bot again by clicking on the file.")
