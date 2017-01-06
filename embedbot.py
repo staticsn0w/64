@@ -21,9 +21,12 @@ password = asdf
 # Make sure to put it in quotes.
 
 ### - Text arguments - ###
-# If you want stuff like "hello {hug}" to be replaced with "hello \(^^\)", leave this on.
+# If you want stuff like "hello {hug}" to be replaced with "hello \(^.^\)", leave this on.
 textargs = True
 #textargs = False
+
+# Don't touch below this line.
+
 import discord
 from discord.ext import commands
 import asyncio
@@ -42,19 +45,18 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if textargs == True:
-        if message.author == message.server.me:	
-#            messagereplace = message.content.replace("{hug}","\\\(^.^\\\)")
-#            messagereplace = messagereplace.replace("{lenny}","( ͡° ͜ʖ ͡°)")
-#            messagereplace = messagereplace.replace("{disapprove}","ಠ\_ಠ")
-#            messagereplace = messagereplace.replace("{shrug}","¯\\_(ツ)_/¯")
-#            messagereplace = messagereplace.replace("{tableflip}","(╯°□°）╯︵ ┻━┻")
-#            messagereplace = messagereplace.replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)")
-#            messagereplace = messagereplace.replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)")
-#            messagereplace = messagereplace.replace("{unflip3}","┬─┬ノ( º _ ºノ)")
-#            messagereplace = messagereplace.replace("{cute}","(◕‿◕✿)")
+        if not type(message.channel) == discord.PrivateChannel:
+            if message.author == message.server.me:	
+                messagereplace = message.content.replace("{hug}","\\\(^.^\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)")
+                if not message.content == messagereplace:
+                    await bot.edit_message(message, messagereplace)
+        else:
             messagereplace = message.content.replace("{hug}","\\\(^.^\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)")
             if not message.content == messagereplace:
-                await bot.edit_message(message, messagereplace)
+                try:
+                    await bot.edit_message(message, messagereplace)
+                except discord.Forbidden:
+                    print("{} pmed you {}".format(message.author, message.content))
     await bot.process_commands(message)
 			
 @bot.command(pass_context=True)
