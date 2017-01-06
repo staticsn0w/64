@@ -3,8 +3,17 @@ A selfbot for Discord.
 You need discord.py to run this.
 https://github.com/Rapptz/discord.py
 
+__Features__
 
---Usage--
+Custom embeds!
+
+![Example of embeds](https://files.catbox.moe/6d1npp.gif)
+
+Text triggers!
+
+![Example of text triggers](https://files.catbox.moe/1z2kiq.gif)
+
+__Usage__
 
 Open the file with a text editor of your choice.
 First, replace the asdf in these:
