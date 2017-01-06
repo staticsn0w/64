@@ -43,15 +43,16 @@ async def on_ready():
 async def on_message(message):
     if textargs == True:
         if message.author == message.server.me:	
-            messagereplace = message.content.replace("{hug}","\\\(^.^\\\)")
-            messagereplace = messagereplace.replace("{lenny}","( ͡° ͜ʖ ͡°)")
-            messagereplace = messagereplace.replace("{disapprove}","ಠ\_ಠ")
-            messagereplace = messagereplace.replace("{shrug}","¯\\_(ツ)_/¯")
-            messagereplace = messagereplace.replace("{tableflip}","(╯°□°）╯︵ ┻━┻")
-            messagereplace = messagereplace.replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)")
-            messagereplace = messagereplace.replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)")
-            messagereplace = messagereplace.replace("{unflip3}","┬─┬ノ( º _ ºノ)")
-            messagereplace = messagereplace.replace("{cute}","(◕‿◕✿)")
+#            messagereplace = message.content.replace("{hug}","\\\(^.^\\\)")
+#            messagereplace = messagereplace.replace("{lenny}","( ͡° ͜ʖ ͡°)")
+#            messagereplace = messagereplace.replace("{disapprove}","ಠ\_ಠ")
+#            messagereplace = messagereplace.replace("{shrug}","¯\\_(ツ)_/¯")
+#            messagereplace = messagereplace.replace("{tableflip}","(╯°□°）╯︵ ┻━┻")
+#            messagereplace = messagereplace.replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)")
+#            messagereplace = messagereplace.replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)")
+#            messagereplace = messagereplace.replace("{unflip3}","┬─┬ノ( º _ ºノ)")
+#            messagereplace = messagereplace.replace("{cute}","(◕‿◕✿)")
+            messagereplace = message.content.replace("{hug}","\\\(^.^\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)")
             if not message.content == messagereplace:
                 await bot.edit_message(message, messagereplace)
     await bot.process_commands(message)
