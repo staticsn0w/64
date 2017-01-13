@@ -30,6 +30,7 @@ textargs = True
 import discord
 from discord.ext import commands
 import asyncio
+import inspect
 
 bot = commands.Bot(command_prefix=invoker, self_bot=True)
 
@@ -45,18 +46,10 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if textargs == True:
-        if not type(message.channel) == discord.PrivateChannel:
-            if message.author == message.server.me:	
-                messagereplace = message.content.replace("{hug}","\\\(^.^\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)")
-                if not message.content == messagereplace:
-                    await bot.edit_message(message, messagereplace)
-        else:
-            messagereplace = message.content.replace("{hug}","\\\(^.^\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)")
+        if message.author == bot.user:	
+            messagereplace = message.content.replace("{hug}","\\\\(^.^\\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)").replace("{zwsp}","​")
             if not message.content == messagereplace:
-                try:
-                    await bot.edit_message(message, messagereplace)
-                except discord.Forbidden:
-                    print("{} pmed you {}".format(message.author, message.content))
+                await bot.edit_message(message, messagereplace)
     await bot.process_commands(message)
 			
 @bot.command(pass_context=True)
@@ -80,5 +73,31 @@ async def embeds(ctx, *, asdf):
             await bot.edit_message(ctx.message, "​", embed=em)
         else:
             await bot.say("I need the `embed links` permission to send an embed.")
+			
+@bot.command(pass_context=True, name='eval')
+async def _eval(ctx, *, code : str):
+    """Evaluates code."""
+    code = code.strip('` ')
+    python = '```py\n{}\n```'
+    result = None
 
+    env = {
+        'ctx': ctx,
+        'message': ctx.message,
+        'server': ctx.message.server,
+        'channel': ctx.message.channel,
+        'author': ctx.message.author
+    }
+
+    env.update(globals())
+ 
+    try:
+        result = eval(code, env)
+        if inspect.isawaitable(result):
+            result = await result
+    except Exception as e:
+        await bot.say(python.format(type(e).__name__ + ': ' + str(e)))
+        return
+    await bot.say(python.format(result))
+		
 bot.run(email, password, bot=False)
