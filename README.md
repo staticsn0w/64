@@ -3,6 +3,8 @@ A selfbot for Discord.
 You need discord.py to run this.
 https://github.com/Rapptz/discord.py
 
+Ask any questions here: discord.gg/KFYAUyw
+
 __Features__
 
 Custom embeds!
