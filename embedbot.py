@@ -37,7 +37,7 @@ bot = commands.Bot(command_prefix=invoker, self_bot=True)
 @bot.event
 async def on_ready():
     print('Logged in as')
-    print(bot.user.name)
+    print(bot.user.name.encode("ascii","backslashreplace").decode())
     print(bot.user.id)
     print('------')
     bot.remove_command("help")
@@ -47,11 +47,16 @@ async def on_ready():
 async def on_message(message):
     if textargs == True:
         if message.author == bot.user:	
-            messagereplace = message.content.replace("{hug}","\\\\(^.^\\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)").replace("{zwsp}","​")
+            messagereplace = message.content.replace("{hug}","\\\\(^.^\\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)").replace("{zwsp}","​").replace("{rtl}","\u202e")
             if not message.content == messagereplace:
                 await bot.edit_message(message, messagereplace)
     await bot.process_commands(message)
 			
+			
+@bot.command(pass_context=True, name="print")
+async def _print(ctx, asdf):
+    print(asdf.encode("ascii","backslashreplace").decode())
+	
 @bot.command(pass_context=True)
 async def test(ctx):
     await bot.say("The selfbot is active.")
