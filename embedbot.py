@@ -1,18 +1,18 @@
-# Embedbot 1.1 made by -Kiwi Catnip ♡#1540s
+# betterEmbedBot 1.0 by @isy#0669
 
 #### -- CONFIG -- ###
 
 # Here you can set the invoker.
-# Example: invoker = "*"
-# That will make your commands start with *. Like *embeds
-invoker = "*"
+# Example: invoker = "."
+# That will make your commands start with ., Like .embeds
+invoker = "."
 
 # Replace asdf with your email and password. Put them in quotes.
 # Example:
-# email = "Killer@keem.star"
-# password = "heywhatsupguysitsscarcehere"
-email = asdf
-password = asdf
+# email = "mufina@is.cute"
+# password = "iwannahughim"
+email = "staticsnw@gmail.com"
+password = "04410f66"
 
 # If you like tokens
 # bot.run(asdf, bot=False)
@@ -47,26 +47,87 @@ async def on_ready():
 async def on_message(message):
     if textargs == True:
         if message.author == bot.user:	
-            messagereplace = message.content.replace("{hug}","\\\\(^.^\\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)").replace("{zwsp}","​").replace("{rtl}","\u202e")
+            messagereplace = message.content.replace("{blob}","(b0w0)b").replace("{hug}","\\\\(^.^\\\\)").replace("{lenny}","( ͡° ͜ʖ ͡°)").replace("{disapprove}","ಠ\_ಠ").replace("{tableflip}","(╯°□°）╯︵ ┻━┻").replace("{unflip}","┬─┬﻿ ノ( ゜-゜ノ)").replace("{unflip2}","​┬─┬ノ( º ⁓ ºノ)").replace("{unflip3}","┬─┬ノ( º _ ºノ)").replace("{cute}","(◕‿◕✿)").replace("{zwsp}","​").replace("{rtl}","\u202e")
             if not message.content == messagereplace:
                 await bot.edit_message(message, messagereplace)
     await bot.process_commands(message)
-			
-			
+						
 @bot.command(pass_context=True, name="print")
 async def _print(ctx, asdf):
     print(asdf.encode("ascii","backslashreplace").decode())
-	
-@bot.command(pass_context=True)
-async def test(ctx):
-    await bot.say("The selfbot is active.")
-	
+
 @bot.command(pass_context=True)
 async def kill(ctx):
-    await bot.say("Killed. You can run the bot again by clicking on the file.")
+    await bot.edit_message(ctx.message, ":ok_hand:")
     await asyncio.sleep(1)
     await bot.logout()
 
+@bot.command(pass_context=True)
+async def lewd(ctx):
+    await bot.edit_message(ctx.message, "`o-oh, aAh! mm, l-lewd...`")
+
+@bot.command(pass_context=True)
+async def gya(ctx):
+    await bot.edit_message(ctx.message, "`road is gya`")
+    await asyncio.sleep(0.2)
+    await bot.edit_message(ctx.message, "`road's a girl`")
+    await asyncio.sleep(0.2)
+    await bot.edit_message(ctx.message, "`mufina is a cutie`")
+    await asyncio.sleep(0.2)
+    await bot.edit_message(ctx.message, "`ur`")
+    await asyncio.sleep(0.2)
+    await bot.add_reaction(ctx.message, '\U0001f1ec')
+    await bot.add_reaction(ctx.message, '\U0001f1fe')
+    await bot.add_reaction(ctx.message, '\U0001f1e6')
+
+@bot.command(pass_context=True)
+async def e(ctx):
+    emoji = ctx.message.content.split(" ",1)[1]
+    if emoji == "sop":
+        await bot.delete_message(ctx.message)
+        await bot.send_file(channel, "sop.png")
+
+@bot.command(pass_context=True)
+async def p(ctx):
+    cmdarg = ctx.message.content.split(" ",1)[1]
+    await bot.change_presence(game=discord.Game(name=cmdarg))
+    await bot.edit_message(ctx.message, ":thumbsup:")
+    await asyncio.sleep(1)
+    await bot.delete_message(ctx.message)
+
+@bot.command(pass_context=True)
+async def f(ctx):
+    await bot.edit_message(ctx.message, "`respects have been paid.`")
+    await bot.add_reaction(ctx.message, '\U0001f1eb')
+
+@bot.command(pass_context=True)
+async def reboot(ctx):
+    await bot.say("rebooting...")
+    await asyncio.sleep(1)
+    await bot.logout()
+    await bot.run(email, password, bot=False)
+    await asyncio.sleep(1)
+    await bot.say("owo")
+
+@bot.command(pass_context=True)
+async def n(ctx):
+    cmdarg = ctx.message.content.split(" ",1)[1]
+    await bot.change_nickname(ctx.message.server.me, cmdarg)
+    await bot.edit_message(ctx.message, ":thumbsup:")
+    await asyncio.sleep(1)
+    await bot.delete_message(ctx.message)
+
+@bot.command(pass_context=True)
+async def hi(ctx):
+    await bot.say("this is isy's selfbot speaking, hi! o/")
+
+@bot.command(pass_context=True)
+async def u(ctx):
+    cmdarg = ctx.message.content.split(" ",1)[1]
+    await bot.edit_profile(password="04410f66", username=cmdarg)
+    await bot.edit_message(ctx.message, ":thumbsup:")
+    await asyncio.sleep(1)
+    await bot.delete_message(ctx.message)
 @bot.command(pass_context=True)
 async def embeds(ctx, *, asdf):
     if type(ctx.message.channel) == discord.PrivateChannel:
