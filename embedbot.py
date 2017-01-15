@@ -9,10 +9,10 @@ invoker = "."
 
 # Replace asdf with your email and password. Put them in quotes.
 # Example:
-# email = "mufina@is.cute"
+# email = "mufin@is.cute"
 # password = "iwannahughim"
-email = "staticsnw@gmail.com"
-password = "04410f66"
+email = asdf
+password = asdf
 
 # If you like tokens
 # bot.run(asdf, bot=False)
@@ -119,12 +119,12 @@ async def n(ctx):
 
 @bot.command(pass_context=True)
 async def hi(ctx):
-    await bot.say("this is isy's selfbot speaking, hi! o/")
+    await bot.say("hi! o/")
 
 @bot.command(pass_context=True)
 async def u(ctx):
     cmdarg = ctx.message.content.split(" ",1)[1]
-    await bot.edit_profile(password="04410f66", username=cmdarg)
+    await bot.edit_profile(password="", username=cmdarg) #add your password in the empty quotes
     await bot.edit_message(ctx.message, ":thumbsup:")
     await asyncio.sleep(1)
     await bot.delete_message(ctx.message)
