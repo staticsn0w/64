@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # embedbot
 A selfbot for Discord.
 You need discord.py to run this.
@@ -27,3 +28,7 @@ password = asdf
 To your actual email and password.
 
 If you like, you can use a token by replacing bot.run(email, password, bot=False) with bot.run("your token", bot=False).
+=======
+# 64
+asdf
+>>>>>>> 82c2208134b75e114e990c65724323b05956ce94
